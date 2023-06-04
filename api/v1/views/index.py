@@ -13,13 +13,13 @@ from models.user import User
 from models.amenity import Amenity
 
 
-@app_views.route("/status")
+@app_views.route("/status", strict_slashes=False)
 def _json():
     _dict = {"status": "OK"}
     return jsonify(_dict)
 
 
-@app_views.route("/stats")
+@app_views.route("/stats", strict_slashes=False)
 def _count():
     classes = {
         "amenities": Amenity,

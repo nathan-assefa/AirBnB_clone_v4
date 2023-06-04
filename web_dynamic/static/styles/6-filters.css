@@ -89,3 +89,8 @@ section.filters > button:hover {
     margin-left: 50px;
     margin-bottom: 10px;
 }
+
+input[type='checkbox'] {
+    position: absolute;
+    width: 20%;
+}
