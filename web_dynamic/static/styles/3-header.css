@@ -5,26 +5,29 @@ header {
     border-bottom: 1px solid #CCCCCC;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
 }
 
-.logo {
+header > .logo {
     width: 142px;
     height: 60px;
     background: url("../images/logo.png") no-repeat center;
-    padding-left: 20px;
+    margin-left: 20px;
 }
 
 #api_status {
     position: absolute;
-    top: 35px;
-    right: 30px;
-    transform: translateY(-50%);
+    right: 0;
+    top: 1rem;
+    margin-right: 30px;
+    border-radius: 50%;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    background-color: #cccccc;
+    background-color: #CCCCCC;
 }
 
 #api_status.available {
-    background-color: #ff545f;
+    background-color: #FF545F;
 }

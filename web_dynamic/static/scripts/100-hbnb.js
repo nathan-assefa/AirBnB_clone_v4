@@ -1,19 +1,40 @@
 $(document).ready(function() {
-  const amenityObj = {};
+  const amenities = {};
+  const states = {};
+  const cities = {}
 
   $('input[type="checkbox"]').on('change', function() {
     const $checkbox = $(this);
-    const amenityId = $checkbox.data('id');
-    const amenityName = $checkbox.data('name');
+    const id = $checkbox.data('id');
+    const name = $checkbox.data('name');
 
-    if ($checkbox.is(':checked')) {
-      amenityObj[amenityName] = amenityId;
+    if (this.checked) {
+	    if ($checkbox.hasClass('amenity')) {
+		    amenities[name] = id;
+	    } else if ($checkbox.hasClass('state')) {
+		    states[name] = id;
+	    } else if ($checkbox.hasClass('city')) {
+		    cities[name] = id;
+	    }
     } else {
-      delete amenityObj[amenityName];
+	    if ($checkbox.hasClass('amenity')) {
+                    delete amenities[name]
+            } else if ($checkbox.hasClass('state')) {
+                    delete states[name]
+            } else if ($checkbox.hasClass('city')) {
+                    delete cities[name]
+            }
     }
-
-    const amenityNames = Object.keys(amenityObj).sort();
-    $('.amenities h4').text(amenityNames.join(', '));
+    const amenityNames = Object.keys(amenities).sort();
+    const stateNames = Object.keys(states).sort();
+    const cityNames = Object.keys(cities).sort();
+    
+    if ($checkbox.hasClass('state') || $checkbox.hasClass('city')) {
+	    const locations = [...stateNames, ...cityNames].join(', ');
+	    $('.locations h4').text(locations)
+    } else if ($checkbox.hasClass('amenity')) {
+	    $('.amenities h4').text(amenityNames.join(', '));
+    }
   });
 
   $.get('http://localhost:5001/api/v1/status/', function(data) {
@@ -64,10 +85,16 @@ $(document).ready(function() {
 
   $('.filters button').click(function() {
     $('.places article').remove(); // Remove all the articles inside the .places element
+    const data = {
+      amenities: Object.values(amenities),
+      states: Object.values(states),
+      cities: Object.values(cities)
+    };
+
     $.ajax({
       type: 'POST',
       url: 'http://localhost:5001/api/v1/places_search',
-      data: JSON.stringify({'amenities': Object.values(amenityObj)}),
+      data: JSON.stringify(data),
       dataType: 'json',
       contentType: 'application/json',
       success: function(data) {

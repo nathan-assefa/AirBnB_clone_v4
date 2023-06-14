@@ -43,6 +43,9 @@ section.filters > button:hover {
     font-weight: 400;
     font-size: 14px;
     margin: 0 0 5px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .popover {
@@ -51,14 +54,16 @@ section.filters > button:hover {
     left: -51px;
     background-color: #FAFAFA;
     width: 100%;
+    max-height: 300px;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     z-index: 1;
     padding: 30px 50px 30px 0;
     margin-top: 17px;
+    overflow: scroll;
 }
 
-.popover, .popover ul {
+.popover, .popover ul{
     list-style-type: none;
 }
 .locations:hover > .popover {
@@ -71,17 +76,25 @@ section.filters > button:hover {
 
 .popover h2 {
     margin-top: 0px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .locations > .popover > li {
     margin-bottom: 30px;
     margin-left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
+
 .locations > .popover > li > ul {
     padding-left: 20px;
+    flex: 0 1 100%;
+    margin-top: 5px;
 }
 .locations > .popover > li > ul > li {
+    display: flex;
     margin-bottom: 10px;
 }
 
@@ -90,7 +103,16 @@ section.filters > button:hover {
     margin-bottom: 10px;
 }
 
-input[type='checkbox'] {
-    position: absolute;
-    width: 20%;
+li > input {
+    margin-right: 10px;
 }
+
+.amenities input[type="checkbox"] {
+	position: absolute;
+	left: 2.5em;
+}
+
+.amenities ul li {
+	padding-left: 1.2em;
+}
+

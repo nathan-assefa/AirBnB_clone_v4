@@ -1,68 +1,64 @@
 <!DOCTYPE html>
-<html lang="zxx">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../static/styles/4-common.css?{{ cache_id }}">
-    <link rel="stylesheet" href="../static/styles/3-header.css?{{ cache_id }}">
-    <link rel="stylesheet" href="../static/styles/3-footer.css?{{ cache_id }}">
-    <link rel="stylesheet" href="../static/styles/6-filters.css?{{ cache_id }}">
-    <link rel="stylesheet" href="../static/styles/8-places.css?{{ cache_id }}">
-    <link rel="icon" href="../static/images/icon.png?{{ cache_id }}" type="image/png">
-
-    <!-- Import jQuery -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-    <!-- Import custom Javascript -->
-    <script type="text/javascript" src="../static/scripts/100-hbnb.js?{{ cache_id }}"></script>
-
-    <title>AirBnb Clone</title>
-  </head>
-  <body>
+    <script src="{{ url_for('static', filename='scripts/4-hbnb.js') }}?cache_id={{ cache_id }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') }}?cache_id={{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}?cache_id={{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}?cache_id={{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}?cache_id={{ cache_id }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/8-places.css') }}?cache_id={{ cache_id }}">
+    <title>AirBnB_clone</title>
+</head>
+<body>
     <header>
-      <div class="logo"></div>
-      <div id="api_status"></div>
+        <div>
+            <div class="logo"></div>
+	    <div id="api_status" class="circle"></div>
+        </div>
     </header>
     <div class="container">
-      <section class="filters">
-	<div class="locations">
-          <h3>States</h3>
-	  <h4>&nbsp;</h4>
-          <ul class="popover">
-	    {% for state in states.values()|sort(attribute='name') %}
-            <li>
-	      <input type="checkbox" data-id="{{ state.id }}" data-name="{{ state.name }}"><h2>{{ state.name }}</h2>
-              <ul>
-	      {% for city in state.cities|sort(attribute='name') %}
-                <li><input type="checkbox" data-id="{{ city.id }}" data-name="{{ city.name }}">{{ city.name }}</li>
-	      {% endfor %}
-              </ul>
-            </li>
-	    {% endfor %}
-	  </ul>
-	</div>
-	<div class="amenities">
-          <h3>Amenities</h3>
-          <h4>&nbsp;</h4>
-          <ul class="popover">
-	    {% for amty in amenities.values() %}
-	    <li>
-	      <input type="checkbox" data-id="{{ amty.id }}" data-name="{{ amty.name }}">{{ amty.name }}
-	    </li>
-	    {% endfor %}
-          </ul>
-	</div>
-	<button>
-	  Search
-	</button>
-      </section>
-      <section class="places">
-	<h1>Places</h1>
-      </section>
+        <section class="filters">
+            <div class="locations">
+                <h3>State</h3>
+                <ul class="popover">
+                    {% for state in states|sort(attribute='name') %}
+                        <li>
+				<input type="checkbox" data-id="{{ state.id }}" data-name="{{ state.name }}">
+				<h2>{{ state.name }}</h2>
+                          <ul>
+                                {% for city in state.cities|sort(attribute='name') %}
+                                        <li>
+						<input type="checkbox" data-id="{{ city.id }}" data-name="{{ city.name }}">
+						<p>{{ city.name }}</p>
+					</li>
+                                {% endfor %}
+                          </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="amenities">
+                <h3>Amenities</h3>
+		<h4>&nbsp;</h4>
+                <ul class="popover">
+                    {% for amenity in amenities|sort(attribute='name') %}
+		    <li><input type="checkbox" data-id="{{ amenity.id }}" data-name="{{ amenity.name }}">{{ amenity.name }}</LI>
+                    {% endfor %}
+                </ul>
+            </div>
+            <button>Search</button>
+       </section>
+       <!--<div class="placesh1"><h1>Places</h1></div>-->
+       <section class="places">
+	 <h1>Places</h1>
+       </section>
     </div>
     <footer>
-      <p>
-	Holberton School
-      </p>
+        <p>Best School</p>
     </footer>
-  </body>
+    </body>
 </html>
